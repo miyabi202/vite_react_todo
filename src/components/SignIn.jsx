@@ -13,7 +13,8 @@ function SignIn() {
     },
     mode: 'onTouched'
   });
-
+ // Function to handle the sign-in process
+  // Send a POST request to the server for sign-in
   const signIn = async(data) => {
     try {
       const res = await axios.post(`${VITE_APP_HOST}/users/sign_in`, data);

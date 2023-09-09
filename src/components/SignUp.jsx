@@ -15,9 +15,10 @@ function SignUp() {
     },
     mode: 'onTouched'
   });
-
+// 處理註冊流程的函數
   const signUp = async(data) => {
     try {
+      // 發送 POST 請求到伺服器進行註冊
       await axios.post(`${VITE_APP_HOST}/users/sign_up`, data);
       Swal.fire({
         title: '註冊成功',

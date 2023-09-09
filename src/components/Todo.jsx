@@ -12,14 +12,14 @@ function Todo() {
   const [newTodo, setNewTodo] = useState("");
   const [currStatus, setCurrStatus]= useState("全部");
   const [currTodos, setCurrTodos] = useState([]);
-
+ // 初始化頁面時，驗證身份並取得待辦事項列表
   useEffect(() => {
     const token = document.cookie.split('; ').find((row) => row.startsWith('todo='))?.split('=')[1];
     axios.defaults.headers.common['Authorization'] = token;
     checkOut();
     getTodoList();
   }, []);
-
+ // 監聽 currStatus 的變化，篩選對應狀態的待辦事項
   useEffect(() => {
     const newTodos = todos.filter(todo => currStatus === "待完成" ? !todo.status : (currStatus === "已完成" ? todo.status : todo));
       setCurrTodos(newTodos);
@@ -39,7 +39,7 @@ function Todo() {
       }).then(() => { navigate('/'); });
     }
   }
-
+// 取得待辦事項列表的函數
   const getTodoList = async() => {
     try {
       const res = await axios.get(`${VITE_APP_HOST}/todos`);
@@ -57,7 +57,7 @@ function Todo() {
       });
     }
   }
-
+// 新增待辦事項的函數
   const addTodo = async(e) => {
     e.preventDefault();
     const todo = { content: newTodo };
